@@ -5,7 +5,6 @@ import os
 from PIL import Image
 from io import BytesIO
 import time
-<<<<<<< HEAD
 import tempfile
 import trimesh
 import plotly.graph_objects as go
@@ -15,14 +14,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Set OpenGL platform
-=======
 from dotenv import load_dotenv  # Import dotenv
 
 # Load environment variables from .env file
 load_dotenv()  # This will automatically load variables from a .env file
 
 # Set the platform for OpenGL (needed for rendering 3D models)
->>>>>>> f40436a2afb66782036e7d95002dc5ac5472a378
 os.environ["PYOPENGL_PLATFORM"] = "egl"
 
 # Load API key from environment variables
@@ -32,7 +29,6 @@ if not API_KEY:
     st.error("API key is missing. Please set the MESHY_API_KEY in your environment.")
     st.stop()
 
-<<<<<<< HEAD
 # Convert image to base64
 def image_to_base64(image_file):
     image = Image.open(image_file)
@@ -50,7 +46,7 @@ def send_to_meshy(image_file):
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
-=======
+
 # API key from environment variable
 API_KEY = os.getenv("MESHY_API_KEY")  # Get the API key from environment variable
 
@@ -164,7 +160,7 @@ image_file = st.file_uploader("Upload a 2D Image (PNG, JPG)", type=["png", "jpg"
 
 if image_file is not None:
     st.image(Image.open(image_file), caption="Uploaded 2D Image", use_container_width=True)
->>>>>>> f40436a2afb66782036e7d95002dc5ac5472a378
+
 
     data = {
         "image_url": f"data:image/jpeg;base64,{image_base64}",
@@ -232,7 +228,7 @@ def visualize_3d_model(glb_data):
         tmpfile.write(glb_data)
         tmpfile.close()
         try:
-<<<<<<< HEAD
+
             mesh = trimesh.load_mesh(tmpfile.name)
             if mesh.is_empty:
                 st.error("The 3D model is empty or invalid.")
@@ -314,7 +310,7 @@ if image_file:
 
             else:
                 st.error("Failed to retrieve GLB URL.")
-=======
+
             # Send the image to Meshy AI and get the model ID
             model_id = send_to_meshy(image_file)
             
@@ -344,4 +340,4 @@ if image_file:
 
         except Exception as e:
             st.error(f"Error generating the 3D model: {e}")
->>>>>>> f40436a2afb66782036e7d95002dc5ac5472a378
+
